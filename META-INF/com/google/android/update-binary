@@ -35,9 +35,21 @@ if [ $? != 0 -o -z "$(ls /tmp/anykernel/tools)" ]; then
 fi;
 chmod -R 755 /tmp/anykernel/tools /tmp/anykernel/bin;
 bb=/tmp/anykernel/tools/busybox;
-
-ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
 ui_print " ";
+ui_print "##############################################";
+ui_print "#         //\                                #";
+ui_print "#        //  \                               #";
+ui_print "#       //    \                              #";
+ui_print "#      //      \                             #";
+ui_print "#     //________\       ____       _   ____  #";
+ui_print "#    //__________\     /    \  || //  /    \ #";
+ui_print "#   //            \   ||____/  ||//   | || | #";
+ui_print "#  //  _________   \  ||_____  ||/    | || | #";
+ui_print "# //___|        |___\  \____/  ||     \____/ #";
+ui_print "##############################################";
+ui_print " ";
+ui_print "Aero Kernel v1.0";
+ui_print "...";
 ui_print "AnyKernel2 by osm0sis @ xda-developers";
 ui_print " ";
 mount -o ro /system;
@@ -48,7 +60,10 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
   for i in 1 2 3 4 5; do
     testname="$(file_getprop /tmp/anykernel/anykernel.sh device.name$i)";
     if [ "$(getprop ro.product.device)" == "$testname" -o "$(getprop ro.build.product)" == "$testname" ]; then
+	  ui_print " ";
       ui_print "$testname";
+	  ui_print " ";
+	  ui_print "Proceeding...";
       match=1;
     fi;
   done;
@@ -59,7 +74,7 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
 fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
-  ui_print "Creating init.d...";
+  ui_print "Creating init.d support...";
   ui_print " ";
   mount -o remount,rw /system;
   mkdir /system/etc/init.d;
@@ -78,6 +93,17 @@ PATH="/tmp/anykernel/bin:$PATH" $bb ash /tmp/anykernel/anykernel.sh $2;
 if [ $? != "0" ]; then
   abort;
 fi;
+
+ui_print " ";
+ui_print "Backing up and Removing MP Decision...";
+ui_print " ";
+mount -o remount,rw /system;
+mkdir /system/bin/mpd_backup;
+set_perm_recursive 0 0 0755 0755 /system/bin/mpd_backup;
+mv /system/bin/mpdecision /system/bin/mpd_backup;
+mount -o remount,ro /system;
+ui_print "Note: to restore MP Decision, the file is found at /system/bin/mpd_backup";
+
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   ui_print " ";
