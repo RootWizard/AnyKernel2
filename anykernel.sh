@@ -3,9 +3,9 @@
 
 ## AnyKernel setup
 # EDIFY properties
-kernel.string=Stock Shamu Kernel with disabled forced encryption and dm-verity
+kernel.string=
 do.devicecheck=1
-do.initd=0
+do.initd=1
 do.modules=0
 do.cleanup=1
 device.name1=shamu
