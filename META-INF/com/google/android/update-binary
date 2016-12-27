@@ -48,7 +48,7 @@ ui_print "#  //  _________   \  ||_____  ||/    | || | #";
 ui_print "# //___|        |___\  \____/  ||     \____/ #";
 ui_print "##############################################";
 ui_print " ";
-ui_print "Aero Kernel Beta v1.1 built with Uber";
+ui_print "Aero Kernel Beta v1.01 built with Uber";
 ui_print "...";
 ui_print "AnyKernel2 by osm0sis @ xda-developers";
 ui_print " ";
